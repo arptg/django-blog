@@ -11,12 +11,37 @@ Class-based views
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    2. Add a URL to urlpatterns:  path('Blog/', include('Blog.urls'))
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+from Users import views as user_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', include('Blog.urls'))
+    path('blog/', include('Blog.urls')),
+    path('register/', user_views.register, name='register'),
+    path('login/', auth_views.LoginView.as_view(template_name='Users/Login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='Users/Logout.html'), name='logout'),
+    path('password-reset/',
+         auth_views.PasswordResetView.as_view(template_name='Users/PasswordReset.html'),
+         name='password-reset'),
+    path('password-reset/done',
+         auth_views.PasswordResetDoneView.as_view(template_name='Users/PasswordResetDone.html'),
+         name='password_reset_done'),
+    path('password-reset/confirm/<uidb64>/<token>',
+         auth_views.PasswordResetConfirmView.as_view(template_name='Users/PasswordResetConfirm.html'),
+         name='password_reset_confirm'
+         ),
+    path('password-reset/complete',
+         auth_views.PasswordResetCompleteView.as_view(template_name='Users/PasswordResetComplete.html'),
+         name='password_reset_complete'),
+    path('profile/', user_views.profile, name='profile')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
