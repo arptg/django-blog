@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<div class="container mt-5 col-xl-3 col-sm-6 col-10">
     <div class="login-form-wrapper">
         <form method="post">
             {% csrf_token %}
@@ -11,16 +12,23 @@
                 </legend>
                 {{ form|crispy }}
             </fieldset>
-            <div class="form-group">
+            <div class="form-group text-right">
                 <button class="btn btn-outline-info">
                     Sign In
                 </button>
             </div>
         </form>
-        <div class="border-top pt-3 sign-in-text">
+        <div class="border-top pt-3 sign-in-text text-center">
             <small class="text-muted">
                 Need an Account? <a href="{% url 'register' %}" class="ml-2">Register Here</a>
             </small>
         </div>
+        <div class="reset-text text-center">
+            <small class="text-muted">
+                Forgot Pasword? <a href="{% url 'password-reset' %}" class="ml-2">Reset Password</a>
+            </small>
+        </div>
     </div>
+</div>
+
 {% endblock content %}

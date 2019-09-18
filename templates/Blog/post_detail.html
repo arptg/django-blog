@@ -1,17 +1,35 @@
 {% extends 'Base.html' %}
 
 {% block content %}
-    <h1>{{ object.title }}</h1>
-    {% if object.author.username == user.username %}
-        <div class="author-controls">
-            <a href="{% url 'blog-update' object.id %}">
-                Update
-            </a>
-            <a href="{% url 'blog-delete' object.id %}">
-                Delete
-            </a>
+    <div class="container mt-5 align-item-end d-sm-flex flex-sm-row-reverse">
+        <div class="col-sm-4 order-sm-1 mb-4">
+            <div class="card border-gray-dark">
+              <div class="card-body">
+                <a href="{% url 'blog-create' %}" class="card-title" style="text-decoration:none;">Create Post</a>
+              </div>
+            </div>
         </div>
-    {% endif %}
-    <p>By {{ object.author }} on {{ post.date_posted | date:"F d, Y"}}</p>
-    <p>{{ object.content }}</p>
+        <div class="col-sm-8 order-sm-2">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">{{ object.title }}</h3>
+                    {% if object.author.username == user.username %}
+                        <ul class="list-inline author-controls">
+                            <li class="list-inline-item">
+                                <a href="{% url 'blog-update' object.id %}" class="btn btn-primary">
+                                    Update
+                                </a></li>
+                            <li class="list-inline-item">
+                                <a href="{% url 'blog-delete' object.id %}" class="btn btn-danger">
+                                    Delete
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                <p class="card-text text-bold">By {{ object.author }} on {{ post.date_posted | date:"F d, Y"}}</By>
+                <p class="card-text ">{{ object.content }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

@@ -22,25 +22,46 @@ from Users import views as user_views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('blog/', include('Blog.urls')),
-    path('register/', user_views.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='Users/Login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='Users/Logout.html'), name='logout'),
-    path('password-reset/',
-         auth_views.PasswordResetView.as_view(template_name='Users/PasswordReset.html'),
-         name='password-reset'),
-    path('password-reset/done',
-         auth_views.PasswordResetDoneView.as_view(template_name='Users/PasswordResetDone.html'),
-         name='password_reset_done'),
-    path('password-reset/confirm/<uidb64>/<token>',
-         auth_views.PasswordResetConfirmView.as_view(template_name='Users/PasswordResetConfirm.html'),
-         name='password_reset_confirm'
-         ),
-    path('password-reset/complete',
-         auth_views.PasswordResetCompleteView.as_view(template_name='Users/PasswordResetComplete.html'),
-         name='password_reset_complete'),
-    path('profile/', user_views.profile, name='profile')
+    path("admin/", admin.site.urls),
+    path("blog/", include("Blog.urls")),
+    path("register/", user_views.register, name="register"),
+    path(
+        "login/",
+        auth_views.LoginView.as_view(template_name="Users/Login.html"),
+        name="login",
+    ),
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(template_name="Users/Logout.html"),
+        name="logout",
+    ),
+    path(
+        "password-reset/",
+        auth_views.PasswordResetView.as_view(template_name="Users/PasswordReset.html"),
+        name="password-reset",
+    ),
+    path(
+        "password-reset/done",
+        auth_views.PasswordResetDoneView.as_view(
+            template_name="Users/PasswordResetDone.html"
+        ),
+        name="password_reset_done",
+    ),
+    path(
+        "password-reset/confirm/<uidb64>/<token>",
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name="Users/PasswordResetConfirm.html"
+        ),
+        name="password_reset_confirm",
+    ),
+    path(
+        "password-reset/complete",
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name="Users/PasswordResetComplete.html"
+        ),
+        name="password_reset_complete",
+    ),
+    path("profile/", user_views.profile, name="profile"),
 ]
 
 if settings.DEBUG:

@@ -1,8 +1,8 @@
 {% extends 'Base.html' %}
 
 {% block content %}
-    <div class="register-form-wrapper">
-        <form method="post">
+    <div class="delete-form-wrapper container col-sm-8 mt-3">
+        <form method="post" id='deleteform'>
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">
@@ -10,16 +10,14 @@
                 </legend>
                 <h2>Are you sure you want to delete the post "{{ object.title }}"? </h2>
             </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-danger" type="submit">
-                    Yes, Delete
-                </button>
-                <a href="{% url 'blog-detail' object.id %}">
-                    <button class="btn btn-outline-secondary">
-                        Cancel
-                    </button>
-                </a>
-            </div>
         </form>
+        <div class="form-group float-right">
+            <button class="btn btn-danger" type="submit" form='deleteform'>
+                Yes, Delete
+            </button>
+            <button class="btn btn-outline-secondary" onclick="window.history.go(-1);">
+                Cancel
+            </button>
+        </div>
     </div>
 {% endblock content %}
